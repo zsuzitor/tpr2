@@ -3,12 +3,12 @@
 var column=0;//4
 var row=4;
 var matrix=[];
-
+var method=-1;
 
 
 //TODO
 //TODO сохранять еще и Q в файл и читать тоже
-
+//add_column_math-- добавляет колонну с названием и парамтерами
 
 
 //старт страницы и начало работы
@@ -27,7 +27,7 @@ function reload_ui(UI){
 	var tmp=column;
 	column=0;
 	for(var i=0;i<tmp;++i){
-		add_column_f(UI);
+		add_column_f(UI,false);
 
 	}
 	
@@ -82,11 +82,11 @@ function add_one_cell_ui(row,column,type){
 		case 2:
 		break;
 	}
-return res;
+	return res;
 }
 
 //добавить столбец
-function add_column_f(UI){
+function add_column_f(UI,q){
 	var res="";
 	var main_div=document.getElementById("main_div_tabl");
 	res+="<div class='div_inline_block div_one_colum' id='one_column_id"+column+"'>";
@@ -100,12 +100,13 @@ function add_column_f(UI){
 		}
 		
 	}
-res+="</div>";
+	res+="</div>";
 
 	//res+="</div>";
-column++;
-main_div.innerHTML+=res;
-
+	column++;
+	main_div.innerHTML+=res;
+	if(q)
+	insert_ui('q',true,column);
 }
 
 
@@ -128,6 +129,8 @@ function del_column(){
 	column--;
 	var div=document.getElementById("one_column_id"+column);
 	div.remove();
+	var bl=document.getElementById("one_inp_num_id"+column);
+	bl.remove();
 	
 	for(var i=0;i<row;++i){
 		matrix[i].splice(column,1);
@@ -137,7 +140,10 @@ function del_column(){
 //кнопка добавить столбец
 function add_column(){
 	save_matr();
-	add_column_f(false);
+	var select=document.getElementById('method');
+	var value = select.options[select.selectedIndex].value;
+	//TODOтут смотреть выбраный метод и добавлять или нет q (2 параметр)
+	add_column_f(false,true);
 	load_matr();
 }
 //кнопка добавить строку
@@ -190,25 +196,147 @@ function min_num(){
 	document.addEventListener("DOMContentLoaded", page_start);
 
 
+//-----------------------------------------------------------------------------------------
+
+function changeInput() {
+
+	var select=document.getElementById('method');
+	var value = select.options[select.selectedIndex].value;
+	switch (value) {
+		case 'minimax':
+		insert_ui("",true);
+		break;
+		case 'bayes_laplas':
+		insert_ui("q",true,column);
+		break;
+		case 'sevidg':
+		insert_ui("",true);
+		break;
+		case 'gurvits':
+		insert_ui("c",true);
+		break;
+		case 'hodg_lemon':
+		insert_ui("q",true,column);
+		insert_ui("v");
+		break;
+		case 'germeyer':
+		insert_ui("q",true,column);
+		insert_ui("a");
+		break;
+		case 'proizvedenie':
+		insert_ui("a",true);
+		break;
+
+		default:
+		alert('Unknown method');
+	}
+
+}
+
+function insert_ui(what,clear,count){
+
+	var div=document.getElementById("input_numbers");
+	var res="";
+	if(clear===true)
+		div.innerHTML="";
+	switch(what){
 
 
-	function loadFile(files) {
-		var file = files[0];
-		if(file) {
-			var reader = new FileReader();
-			reader.onload = function (e) {  
-				var text = e.target.result;
-				var arr = text.split(',');
-				row=+arr[0];
-				column=+arr[1];
-				arr.splice(0,2);
-				matrix=[];
+case "q"://one_input_q_"+i+"
+for(var i=0;i<count;++i){
+	var bl=document.getElementById("one_input_q_"+i);
+//var ggg=bl===null?0:bl.value;
+
+res+="<div class='div_inline_block one_inp_num' id='one_inp_num_id"+i+"'><label>q"+i+"</label><input value='"+(bl===null?0:bl.value)+"' id='one_input_q_"+i+"' type='number'></div>";
+
+
+}
+div.innerHTML+=res;
+
+break;
+
+case "c"://one_input_c
+
+res+="<div class='div_inline_block one_inp_num' id='one_inp_num_c_id'><label>c=</label><input value='0'  id='one_input_c' type='number'></div>";
+div.innerHTML+=res;
+break;
+
+
+case "v"://one_input_v
+res+="<div class='div_inline_block one_inp_num' id='one_inp_num_v_id'><label>v=</label><input value='0' id='one_input_v' type='number'></div>";
+div.innerHTML+=res;
+break;
+
+case "a"://one_input_a
+res+="<div class='div_inline_block one_inp_num' id='one_inp_num_v_id'><label>a=</label><input value='0' id='one_input_a' type='number'></div>";
+div.innerHTML+=res;
+break;
+}
+}
 
 
 
-				var num=0;
-				for(var i=0;i<row;++i){
-					for(var i2=0;i2<column;++i2){
+
+function start_math(){
+	save_matr();
+	//div_for_math
+	var select=document.getElementById('method');
+	var value = select.options[select.selectedIndex].value;
+	switch (value) {
+		case 'minimax':
+minimax_method();
+		break;
+		case 'bayes_laplas':
+
+		break;
+		case 'sevidg':
+		break;
+		case 'gurvits':
+
+		break;
+		case 'hodg_lemon':
+
+		break;
+		case 'germeyer':
+
+
+		break;
+		case 'proizvedenie':
+
+		break;
+
+		default:
+		alert('Unknown method');
+	}
+
+load_matr();
+}
+
+
+function minimax_method(){
+
+}
+
+
+
+
+function loadFile(files) {
+	var file = files[0];
+	if(file) {
+		var reader = new FileReader();
+		reader.onload = function (e) {  
+			var text = e.target.result;
+			var arr = text.split(',');
+			row=+arr[0];
+			column=+arr[1];
+			arr.splice(0,2);
+			matrix=[];
+
+
+
+			var num=0;
+			for(var i=0;i<row;++i){
+				for(var i2=0;i2<column;++i2){
 	//обычне ячейки
 	
 	if(matrix[i]==undefined)

@@ -18,14 +18,20 @@
 	<input type="file" onchange="loadFile(this.files)" id="file">
 	<input type="button" onclick="saveFile()" value="сохранить в файл">
 	<hr>
-<button onclick="deg()">Северо-Западного угла</button>
-<button onclick="small_price()">Наименьшей стоимости</button>
-<button onclick="meth_pot()">Метод потенциалов</button>
-<button onclick="while_method()">Циклы</button>
+<select name="method" id="method" onchange="changeInput()">
+				<option selected value="minimax">Минимаксный метод</option>
+				<option value="bayes_laplas">Критерий Байеса-Лапласа</option>
+				<option value="sevidg">Критерий Сэвиджа</option>
+				<option value="gurvits">Критерий Гурвица</option>
+				<option value="hodg_lemon">Критерий Ходжа-Лемона</option>
+				<option value="germeyer">Критерий Гермейера</option>
+				<option value="proizvedenie">Критерий произведения</option>
+				
+			</select>
 
 	<hr>
 	<div class="main_div">
-		
+		<div id="input_numbers"></div>
 			
 			<div class="div_inline_block" id="main_div_tabl">
 				
