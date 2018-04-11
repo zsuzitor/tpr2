@@ -39,12 +39,13 @@ margin-left: 3px;
 }
 
 
-div.input_block{
+div.input_block,div.output_block{
 box-sizing: border-box;
 margin-top: 3px;
  border:2px solid black;
  height: 50px;
  width:50px;
+ overflow: hidden;
 
 }
 
