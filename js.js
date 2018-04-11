@@ -730,7 +730,7 @@ function germeyer_method(){
 	div.innerHTML=res;
 
 }
-
+ 
 function proizvedenie(){
 	var div=document.getElementById("div_for_math");
 	var res="";
