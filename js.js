@@ -336,13 +336,23 @@ function start_math(){
 
 function minimax_method(){
 	var div=document.getElementById("div_for_math");
-
+var div_out_name=document.getElementById("div_output_name_column");
+	var str_for_name="";
 	var mass_eir=[];
+
+	str_for_name+="<div class='div_inline_block'>";
+for(var i=0;i<column;++i){
+str_for_name+="<div class='div_name_col_block div_inline_block output_block'><label>F "+i+"</label></div>";
+}
+str_for_name+="</div>";
+str_for_name+="<div class='main_div_for_name div_inline_block'><div class='div_name_col_block div_inline_block output_block'><label>Eir</label></div>";
+str_for_name+="<div class='div_name_col_block div_inline_block output_block'><label>max(Eir)</label></div></div>";
+div_out_name.innerHTML=str_for_name;
+
 	var res="<div class='div_one_colum div_inline_block'>";
 	for(var i=0;i<row;++i){
 		mass_eir[i]=min_max_num(true,matrix[i]);
 		res+="<div class='output_block' id='output_block_id_eir"+row+"'><label>"+mass_eir[i]+"</label></div>";
-
 	}
 
 	res+="</div>";
@@ -362,7 +372,20 @@ function minimax_method(){
 
 function bayes_laplas_method(){
 	var div=document.getElementById("div_for_math");
+	var div_out_name=document.getElementById("div_output_name_column");
 	var q_mass=[];
+
+str_for_name+="<div class='div_inline_block'>";
+for(var i=0;i<column;++i){
+str_for_name+="<div class='div_name_col_block div_inline_block output_block'><label>F "+i+"</label></div>";
+}
+str_for_name+="</div>";
+str_for_name+="<div class='main_div_for_name div_inline_block'><div class='div_name_col_block div_inline_block output_block'><label>S(EijQi)</label></div>";
+str_for_name+="<div class='div_name_col_block div_inline_block output_block'><label>max(Eir)</label></div></div>";
+div_out_name.innerHTML=str_for_name;
+
+
+
 	for(var i=0;i<column;++i){
 		q_mass.push(+ document.getElementById("one_input_q_"+i).value)
 	}
@@ -428,9 +451,26 @@ div.innerHTML=res;
 
 function sevidg_method(){
 	var div=document.getElementById("div_for_math");
+	var div_out_name=document.getElementById("div_output_name_column");
 
 	var matr_eir=[];
 	var res="";
+
+str_for_name+="<div class='div_inline_block'>";
+for(var i=0;i<column;++i){
+str_for_name+="<div class='div_name_col_block div_inline_block output_block'><label>F "+i+"</label></div>";
+}
+str_for_name+="</div>";
+str_for_name+="<div class='main_div_for_name div_inline_block'>";
+for(var i=0;i<column;++i){
+str_for_name+="<div class='div_name_col_block div_inline_block output_block'><label>F` "+i+"</label></div>";
+}
+
+str_for_name+="<div class='div_name_col_block div_inline_block output_block'><label>max(Eir)</label></div>";
+str_for_name+="<div class='div_name_col_block div_inline_block output_block'><label>min(Eir)</label></div></div>";
+div_out_name.innerHTML=str_for_name;
+
+
 
 	for(var i2=0;i2<column;++i2){
 		var mass_max_f=[];
@@ -498,11 +538,16 @@ div.innerHTML=res;
 
 function gurvits_method(){
 	var div=document.getElementById("div_for_math");
+	var div_out_name=document.getElementById("div_output_name_column");
 	var res="";
 	var c_num=document.getElementById("one_input_c").value;
 	res+="<div class='div_one_colum div_inline_block'>";
 	var mass_min_ei=[];
 	var mass_max_ei=[];
+
+
+
+
 
 	for(var i=0;i<row;++i){
 		var eq= min_max_num(true,matrix[i])*c_num;
@@ -575,6 +620,7 @@ function gurvits_method(){
 
 function hodg_lemon_method(){
 	var div=document.getElementById("div_for_math");
+	var div_out_name=document.getElementById("div_output_name_column");
 	var res="";
 	var v_num=+document.getElementById("one_input_v").value;
 	var q_mass=[];
@@ -669,6 +715,7 @@ function hodg_lemon_method(){
 
 function germeyer_method(){
 	var div=document.getElementById("div_for_math");
+	var div_out_name=document.getElementById("div_output_name_column");
 	var res="";
 	var a_num=+document.getElementById("one_input_a").value;
 	var q_mass=[];
@@ -732,6 +779,7 @@ function germeyer_method(){
 }
  
 function proizvedenie(){
+	var div_out_name=document.getElementById("div_output_name_column");
 	var div=document.getElementById("div_for_math");
 	var res="";
 	var a_num=+document.getElementById("one_input_a").value;

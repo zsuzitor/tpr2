@@ -33,7 +33,7 @@ ul {
 }
 
 div.div_one_colum{
-width:50px;
+width:70px;
 margin-left: 3px;
 
 }
@@ -44,7 +44,7 @@ box-sizing: border-box;
 margin-top: 3px;
  border:2px solid black;
  height: 50px;
- width:50px;
+ width:70px;
  overflow: hidden;
 
 }
@@ -60,4 +60,11 @@ div.input_block_down{
 width: 100px;
 border: solid black 2px;
 
+}
+div.div_name_col_block{
+  margin-left: 3px;
+
+}
+div.main_div_for_name{
+    margin-left: 3px;
 }
