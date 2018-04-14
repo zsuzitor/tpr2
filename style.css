@@ -48,7 +48,10 @@ margin-top: 3px;
  overflow: hidden;
 
 }
+div.output_block_name{
+height: 100px;
 
+}
 
 
 div.input_block_down{
@@ -67,4 +70,8 @@ div.div_name_col_block{
 }
 div.main_div_for_name{
     margin-left: 3px;
+}
+div.main_div{
+    width: 3000px;
+    overflow-x: auto;
 }

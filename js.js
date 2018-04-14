@@ -222,6 +222,9 @@ function changeInput() {
 
 	var select=document.getElementById('method');
 	var value = select.options[select.selectedIndex].value;
+	document.getElementById("div_output_name_column").innerHTML="";
+	document.getElementById("div_for_math").innerHTML="";
+
 	switch (value) {
 		case 'minimax':
 		insert_ui("",true);
@@ -339,7 +342,7 @@ function insert_ui_name(){
 	var res="";
 	res+="<div class='div_inline_block'>";
 	for(var i=0;i<column;++i){
-		res+="<div class='div_name_col_block div_inline_block output_block'><label>F "+i+"</label></div>";
+		res+="<div class='div_name_col_block div_inline_block output_block_name output_block'><label>F "+i+"</label></div>";
 	}
 	res+="</div>";
 	res+="<div class='main_div_for_name div_inline_block'>";
@@ -348,12 +351,12 @@ function insert_ui_name(){
 
 		if(arguments[i]=="f")
 			for(var i2=0;i2<column;++i2)
-				res+="<div class='div_name_col_block div_inline_block output_block'><label>F` "+i2+"</label></div>";
+				res+="<div class='div_name_col_block div_inline_block output_block_name output_block'><label>F` "+i2+"</label></div>";
 			else if (arguments[i]=="eq")
 				for(var i2=0;i2<column;++i2)
-					res+="<div class='div_name_col_block div_inline_block output_block'><label>e "+i2+"q"+i2+"</label></div>";
+					res+="<div class='div_name_col_block div_inline_block output_block_name output_block'><label>e "+i2+"q"+i2+"</label></div>";
 				else
-					res+="<div class='div_name_col_block div_inline_block output_block'><label>"+arguments[i]+"</label></div>";
+					res+="<div class='div_name_col_block div_inline_block output_block_name output_block'><label>"+arguments[i]+"</label></div>";
 			}
 			res+="</div>";
 			div_out_name.innerHTML=res;
@@ -365,7 +368,7 @@ function insert_ui_name(){
 
 			var mass_eir=[];
 
-			insert_ui_name("Eir","max(Eir)");
+			insert_ui_name("Eir","max (Eir)");
 
 			var res="<div class='div_one_colum div_inline_block'>";
 			for(var i=0;i<row;++i){
@@ -394,7 +397,7 @@ function insert_ui_name(){
 			var q_mass=[];
 
 
-			insert_ui_name("eq","S(EijQi)","max(Eir)");
+			insert_ui_name("eq","S (Eij Qi)","max (Eir)");
 
 
 			for(var i=0;i<column;++i){
@@ -467,7 +470,7 @@ function sevidg_method(){
 	var matr_eir=[];
 	var res="";
 
-	insert_ui_name("f","max(Eir)","min(Eir)");
+	insert_ui_name("f","max (Eir)","min (Eir)");
 
 
 	for(var i2=0;i2<column;++i2){
@@ -543,7 +546,7 @@ function gurvits_method(){
 	var mass_min_ei=[];
 	var mass_max_ei=[];
 
-	insert_ui_name("cmin(eir)","(1-c)max(eij))","eir","max(eir)");
+	insert_ui_name("cmin (eir)","(1-c) max (eij))","eir","max (eir)");
 
 
 
@@ -624,7 +627,7 @@ function hodg_lemon_method(){
 	var q_mass=[];
 	var eqv_mass=[];
 
-	insert_ui_name("S(EijQi)","v*S(EijQi)","min(Eij)","(1-v)*min(Eij)","v*S(EijQi)+(1-v)*min(Eij)","max(Eir)");
+	insert_ui_name("S (EijQi)","v*S (EijQi)","min (Eij)","(1-v)* min (Eij)","v*S (EijQi) +(1-v)* min(Eij)","max (Eir)");
 
 	for(var i=0;i<column;++i)
 		q_mass.push(+document.getElementById("one_input_q_"+i).value);
@@ -668,14 +671,7 @@ function hodg_lemon_method(){
 
 	res+="</div>";
 
-	res+="<div class='div_one_colum div_inline_block'>";
-	for(var i=0;i<row;++i){
-		mass_eir[i]=min_max_num(true,matrix[i]);
-		res+="<div class='output_block' id='output_block_id_eir"+row+"'><label>"+mass_eir[i]+"</label></div>";
-
-	}
-
-	res+="</div>";
+	
 
 	var one_m_v_min=[];
 	res+="<div class='div_one_colum div_inline_block'>";
@@ -722,7 +718,7 @@ function germeyer_method(){
 	var q_mass=[];
 	//var max_num_table=min_max_num(false,matrix);
 
-	insert_ui_name("f","f","min(Eij)","max(Eir)");
+	insert_ui_name("f","f","min (Eij)","max (Eir)");
 
 	for(var i=0;i<column;++i)
 		q_mass.push(+document.getElementById("one_input_q_"+i).value);
@@ -789,7 +785,7 @@ function proizvedenie(){
 	var a_num=+document.getElementById("one_input_a").value;
 	var new_matr=[];
 
-	insert_ui_name("f","mult(Eij)","max(Eir)");
+	insert_ui_name("f","mult (Eij)","max (Eir)");
 
 	for(var i2=0;i2<column;++i2){
 		res+="<div class='div_one_colum div_inline_block'>";
@@ -816,6 +812,20 @@ function proizvedenie(){
 		res+="<div class='output_block' id='output_block_id_eir"+row+"'><label>";
 		
 		res+=mult_mass[i];
+		res+="</label></div>";
+
+	}
+	res+="</div>";
+
+
+	res+="<div class='div_one_colum div_inline_block'>";
+	for(var i=0;i<column;++i){
+		var mm_num=min_max_num(false,mult_mass);
+		
+		
+		res+="<div class='output_block' id='output_block_id_eir"+row+"'><label>";
+		if(mm_num==mult_mass[i])
+			res+=mult_mass[i];
 		res+="</label></div>";
 
 	}
