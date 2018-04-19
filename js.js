@@ -571,8 +571,14 @@ function insert_ui_name(){
 					if(matrix_sub_1[i]==undefined)
 						matrix_sub_1[i]=[];
 					res+="<div class='output_block' id='output_block_id_eir"+row+"'><label>";
-					matrix_sub_1[i][i2]=matrix[i][i2]-a_num;
+					if(matrix[i][i2]>0){
+matrix_sub_1[i][i2]=matrix[i][i2]-a_num;
 					res+=matrix[i][i2]-a_num;
+					}
+					else{
+						matrix_sub_1[i][i2]=matrix[i][i2];
+					res+=matrix[i][i2];
+					}
 					res+="</label></div>";
 				}
 				res+="</div>";
@@ -621,7 +627,10 @@ function insert_ui_name(){
 				for(var i=0;i<row;++i){
 					if(new_matr[i]==undefined)
 						new_matr[i]=[];
+					if(matrix[i][i2]<0)
 					new_matr[i][i2]=matrix[i][i2]+a_num;
+				else
+				new_matr[i][i2]=matrix[i][i2];
 					res+="<div class='output_block' id='output_block_id_eir"+row+"'><label>";
 					res+=new_matr[i][i2];
 					res+="</label></div>";
