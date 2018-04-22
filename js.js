@@ -108,6 +108,7 @@ function del_column(){
 	var div=document.getElementById("one_column_id"+column);
 	div.remove();
 	var bl=document.getElementById("one_inp_num_id"+column);
+	if(bl!=null)
 	bl.remove();
 	for(var i=0;i<row;++i){
 		matrix[i].splice(column,1);
